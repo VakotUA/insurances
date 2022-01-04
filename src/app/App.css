@@ -1,0 +1,14 @@
+.App {
+  text-align: center;
+  padding: 10px;
+  color: white;
+  border: 2px solid gray;
+  border-radius: 20px;
+  width: 100%;
+}
+
+.container {
+  width: 100%;
+  max-width: 650px;
+  margin: 0 auto;
+}
