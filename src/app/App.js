@@ -12,8 +12,8 @@ function App () {
         <Navbar />
         <div className="App">
           <Switch>
-            <Route exact path="/modules/home" component={Home}/>
-            <Route path="/modules/cart" component={Cart}/>
+            <Route exact path="/" component={Home}/>
+            <Route path="/cart" component={Cart}/>
             <Redirect to="/"/>
           </Switch>
         </div>
