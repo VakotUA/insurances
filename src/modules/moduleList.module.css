@@ -8,7 +8,7 @@
 
 .block {
 	width: 400px;
-	height: 150px;
+	min-height: 150px;
 	border: 2px solid white;
 	border-radius: 15px;
 	display: flex;
@@ -21,17 +21,43 @@
 	opacity: 1;
 }
 
-.active {
+.input {
+	width: 100%;
+	height: 75px;
+	display: inline-flex;
+	align-items: center;
+	justify-content: space-between;
+	flex-wrap: nowrap;
+	position: relative;
+}
+
+.value {
+	width: 20%;
+	text-align: right;
+	color: orange;
+}
+
+input[type="range"] {
+	width: 80%;
+}
+
+.upperBound, .lowerBound {
+	width: 40%;
+	position: absolute;
+	top: 0;
 	opacity: .5;
 }
-
-.form {
-  margin: 0 auto;
-  padding: 100px 30px 0;
+.lowerBound {
+	text-align: left;
 }
 
-.input-range {
-  margin-bottom: 160px;
+.upperBound {
+	text-align: right;
+	right: 20%;
+}
+
+.active {
+	opacity: .5;
 }
 
 .name {
@@ -45,7 +71,7 @@
 	justify-content: space-between;
 }
 
-.stats > p:hover {
+.stats > p:hover, .value:hover {
 	transform: scale(1.15);
 }
 
@@ -70,9 +96,5 @@
 }
 
 .btn:hover::after {
-	width: 100%;
-}
-
-input[type="range"] {
 	width: 100%;
 }

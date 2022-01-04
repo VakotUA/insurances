@@ -1,42 +1,52 @@
-import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { moduleAdded, moduleToCart, setCoverage } from './moduleSlice';
-import { createSelector } from 'reselect';
-import classNames from 'classnames';
-import styles from './moduleList.module.css';
+import React from 'react'
+import { useDispatch } from 'react-redux'
+import { moduleToCart, setCoverage } from './moduleSlice'
+import { arrayOf, object } from 'prop-types'
+import classNames from 'classnames'
+import styles from './moduleList.module.css'
 
-const moduleListSelector = createSelector(
-  (state) => state.modules,
-  (modules) => modules
-)
+ModuleList.propTypes = {
+  list: arrayOf(object)
+}
 
-export function ModuleList() {
-  const moduleList = useSelector(moduleListSelector)
+function ModuleList (props) {
   const dispatch = useDispatch()
-
-  console.log(moduleList)
+  const moduleList = props.list.map(item => item)
 
   return (
     <ul className={styles.list}>
-      {moduleList.map((item) => 
-        <li key={item.id} className={classNames(styles.block, {[styles.active]: item.isInCart})}>
-          <h3>{item.name}</h3>
-          <input
-          type="range"
+    {moduleList.map((item) =>
+      <li key={item.id}
+      className={classNames(styles.block, { [styles.active]: item.isInCart })}>
+
+        <h3>{item.name}</h3>
+
+        <div className={styles.input}>
+          <input type="range"
           min={item.coverage[0]} max={item.coverage[1]}
           defaultValue={item.selectedCoverage}
-          onMouseUp={(event) => {
-            dispatch(setCoverage({id: item.id, newCoverage: event.target.value}))
-          }}
-          />
+          onInput={(event) => {
+            dispatch(setCoverage({ id: item.id, newCoverage: event.target.value }))
+          }}/>
+
+          <p className={styles.lowerBound}>{item.coverage[0]}</p>
+          <p className={styles.upperBound}>{item.coverage[1]}</p>
+          <p className={styles.value}>{item.selectedCoverage}</p>
+        </div>
+
+        <div className={styles.stats}>
           <p>Risk: {item.risk}</p>
-          <div
-          className={styles.btn}
-          onClick={() => dispatch(moduleToCart({id: item.id}))}>
-            {item.isInCart ? "Remove from cart" : "To cart"}
-          </div>
-        </li>
-      )}
-    </ul>
+          <p>Price: {item.price}</p>
+        </div>
+
+        <div className={styles.btn}
+        onClick={() => dispatch(moduleToCart({ id: item.id }))}>
+        {item.isInCart ? 'Remove from cart' : 'To cart'}
+        </div>
+
+      </li>
+    )}</ul>
   )
 }
+
+export default ModuleList
