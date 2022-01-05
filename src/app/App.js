@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
+import { HashRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
 import Navbar from '../navbar/Navbar'
 import { Home } from '../modules/home'
 import { Cart } from '../modules/cart'
@@ -7,7 +7,7 @@ import './App.css'
 
 function App () {
   return (
-    <Router basename="/insurances">
+    <Router basename="/modules">
       <div className="container">
         <Navbar />
         <div className="App">
