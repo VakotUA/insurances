@@ -7,7 +7,7 @@ import './App.css'
 
 function App () {
   return (
-    <Router>
+    <Router basename="/insurances">
       <div className="container">
         <Navbar />
         <div className="App">
